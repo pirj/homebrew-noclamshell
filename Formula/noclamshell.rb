@@ -8,7 +8,11 @@ class Noclamshell < Formula
     bin.install "noclamshell"
   end
 
-  plist_options manual: "noclamshell"
+  service do
+    run [opt_bin/"noclamshell", "--no-daemon"]
+    keep_alive true
+    working_dir HOMEBREW_PREFIX
+  end
 
   def plist; <<~XML
     <?xml version="1.0" encoding="UTF-8"?>
